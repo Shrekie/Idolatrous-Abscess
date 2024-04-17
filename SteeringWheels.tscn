@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://k31pp4rbgm1p"]
+
+[ext_resource type="Texture2D" uid="uid://dqyusl7hs1lmf" path="res://Sprites/WheelBackground.png" id="1_jjeeh"]
+[ext_resource type="Texture2D" uid="uid://dl3cjvgis1pwj" path="res://Sprites/RotatorWheel.png" id="2_fi8op"]
+[ext_resource type="Texture2D" uid="uid://cpd7qr825o3ii" path="res://Sprites/ThrusterWheel.png" id="3_dc2cy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4n1ro"]
+radius = 14.0357
+
+[node name="SteeringWheels" type="Node2D"]
+
+[node name="RotatorWheel" type="Node2D" parent="."]
+
+[node name="BackgroundSprite" type="Sprite2D" parent="RotatorWheel"]
+texture = ExtResource("1_jjeeh")
+
+[node name="RotatingArea" type="Area2D" parent="RotatorWheel"]
+
+[node name="RotatingSprite" type="Sprite2D" parent="RotatorWheel/RotatingArea"]
+texture = ExtResource("2_fi8op")
+
+[node name="RotatingShape" type="CollisionShape2D" parent="RotatorWheel/RotatingArea"]
+shape = SubResource("CircleShape2D_4n1ro")
+
+[node name="ThrusterWheel" type="Node2D" parent="."]
+position = Vector2(-53, 0)
+
+[node name="BackgroundSprite" type="Sprite2D" parent="ThrusterWheel"]
+texture = ExtResource("1_jjeeh")
+
+[node name="ThrustArea" type="Area2D" parent="ThrusterWheel"]
+
+[node name="ThrustSprite" type="Sprite2D" parent="ThrusterWheel/ThrustArea"]
+texture = ExtResource("3_dc2cy")
+
+[node name="ThrustShape" type="CollisionPolygon2D" parent="ThrusterWheel/ThrustArea"]
+polygon = PackedVector2Array(13, 0, -13, 15, -13, -15)
