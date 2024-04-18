@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://ciscwdmivok6f"]
+
+[ext_resource type="Texture2D" uid="uid://ij0j3n3ysam8" path="res://Sprites/FlipperBackground.png" id="1_3y0q6"]
+[ext_resource type="Texture2D" uid="uid://bjyy8ka48xkds" path="res://Sprites/FlipswitcherOff.png" id="2_ir2wt"]
+[ext_resource type="Texture2D" uid="uid://doifrhfvno5fl" path="res://Sprites/FlipswitcherOn.png" id="3_u1ltr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8h0n7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ir2wt")
+}],
+"loop": false,
+"name": &"off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_u1ltr")
+}],
+"loop": false,
+"name": &"on",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1w5mx"]
+
+[node name="Flipper" type="Node2D"]
+position = Vector2(48, 0)
+metadata/_edit_group_ = true
+
+[node name="BackgroundSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_3y0q6")
+
+[node name="FlipperswitchArea" type="Area2D" parent="."]
+
+[node name="FlipperswitchSprite" type="AnimatedSprite2D" parent="FlipperswitchArea"]
+sprite_frames = SubResource("SpriteFrames_8h0n7")
+animation = &"off"
+
+[node name="FlipperswitchShape" type="CollisionShape2D" parent="FlipperswitchArea"]
+shape = SubResource("RectangleShape2D_1w5mx")

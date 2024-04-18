@@ -38,11 +38,11 @@ func _process(delta):
 			mouse_between_wheel_threshold(rotator_wheel_container)
 			
 		if dragging_thruster:
-			thrust_wheel.position = tug_control_unrotated(thrust_wheel,\
-			thrust_wheel_drag, being_to_move, delta)
+			thrust_wheel.position = tug_control_unrotated(thrust_wheel, \
+			thrust_wheel_drag, delta)
 		if dragging_rotator:
-			rotator_wheel.position = tug_control_unrotated(rotator_wheel,\
-			rotator_wheel_drag, being_to_move, delta)
+			rotator_wheel.position = tug_control_unrotated(rotator_wheel, \
+			rotator_wheel_drag, delta)
 			
 		var rotator_direction_to_mouse = \
 		mouse_between_wheel(rotator_wheel_container)
@@ -69,8 +69,6 @@ func _process(delta):
 				thrust_direction_to_mouse.normalized() * \
 				(thrust_direction_to_mouse.length()/ \
 				thrust_acceleration_splitter)
-			else:
-				damp_being_acceleration(delta)
 			
 	if not dragging_rotator:
 		rotator_wheel.position = \
@@ -81,8 +79,6 @@ func _process(delta):
 		thrust_wheel.position.lerp(Vector2.ZERO, delta * 50)
 		
 	damp_being_acceleration(delta)
-	being_to_move.velocity = \
-	being_to_move.velocity.limit_length(thrust_max_speed)
 	being_to_move.move_and_slide()
 
 func mouse_between_wheel_threshold(wheel_start: Node2D):
@@ -97,10 +93,9 @@ func mouse_between_wheel(wheel: Node2D):
 	return wheel.get_global_mouse_position() - \
 	wheel.global_position
 	
-func tug_control_unrotated(control: Node2D, tug : Vector2, \
-unrotater: Node2D, delta: float):
+func tug_control_unrotated(control: Node2D, tug : Vector2, delta: float):
 	return control.position.lerp(\
-	tug.rotated(-unrotater.rotation), delta * 50)
+	tug.rotated(-being_to_move.rotation), delta * 50)
 	
 func damp_rotation_acceleration(direction_to_mouse: Vector2):
 	return clamp(direction_to_mouse.length()/rotation_acceleration_splitter, \
@@ -112,6 +107,9 @@ func damp_being_acceleration(delta):
 		being_to_move.velocity.normalized() * (thrust_friction * delta)
 	else:
 		being_to_move.velocity = Vector2.ZERO
+	
+	being_to_move.velocity = \
+	being_to_move.velocity.limit_length(thrust_max_speed)
 
 func _input(event):
 	if event is InputEventMouseButton:

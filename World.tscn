@@ -1,35 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3dsa1auy6jv8"]
+[gd_scene load_steps=3 format=3 uid="uid://d3dsa1auy6jv8"]
 
-[ext_resource type="PackedScene" uid="uid://k31pp4rbgm1p" path="res://SteeringWheels.tscn" id="2_ixtgj"]
-[ext_resource type="Texture2D" uid="uid://csfaari3f0toj" path="res://Sprites/Wrangler.png" id="3_grekq"]
-[ext_resource type="Script" path="res://MouseSteerer.gd" id="4_trwnd"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hiehq"]
-size = Vector2(51.0001, 143)
+[ext_resource type="PackedScene" uid="uid://cxjd35j543pi6" path="res://Beings/WranglingBeing.tscn" id="1_muwxe"]
+[ext_resource type="Texture2D" uid="uid://dxo73cqkrg1d0" path="res://Sprites/Flower.png" id="2_32eel"]
 
 [node name="World" type="Node"]
 
-[node name="Wrangler Being" type="CharacterBody2D" parent="."]
-position = Vector2(558, 415)
-motion_mode = 1
+[node name="WranglingBeing" parent="." instance=ExtResource("1_muwxe")]
+position = Vector2(485, 327)
 
-[node name="WholeShape" type="CollisionShape2D" parent="Wrangler Being"]
-position = Vector2(-8.5, 9.15527e-05)
-rotation = 1.57079
-shape = SubResource("RectangleShape2D_hiehq")
+[node name="WranglerBeing2" parent="." instance=ExtResource("1_muwxe")]
+position = Vector2(612, 645)
 
-[node name="Wrangler" type="Sprite2D" parent="Wrangler Being"]
-position = Vector2(44, 0)
-texture = ExtResource("3_grekq")
-
-[node name="SteeringWheels" parent="Wrangler Being" instance=ExtResource("2_ixtgj")]
-
-[node name="MouseSteerer" type="Node" parent="." node_paths=PackedStringArray("being_to_move", "thrust_wheel_container", "thrust_wheel", "rotator_wheel_container", "rotator_wheel")]
-script = ExtResource("4_trwnd")
-being_to_move = NodePath("../Wrangler Being")
-thrust_wheel_container = NodePath("../Wrangler Being/SteeringWheels/ThrusterWheel")
-thrust_wheel = NodePath("../Wrangler Being/SteeringWheels/ThrusterWheel/ThrustArea")
-rotator_wheel_container = NodePath("../Wrangler Being/SteeringWheels/RotatorWheel")
-rotator_wheel = NodePath("../Wrangler Being/SteeringWheels/RotatorWheel/RotatingArea")
-
-[editable path="Wrangler Being/SteeringWheels"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(747, 447)
+texture = ExtResource("2_32eel")
