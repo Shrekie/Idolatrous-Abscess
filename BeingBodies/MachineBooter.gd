@@ -1,12 +1,12 @@
 extends Node
 
-@export var mouse_activator : Node
+@export var flipper_activator : Node
 @export var machine_sprite : AnimatedSprite2D
 
 func _ready():
-	if (mouse_activator):
-		mouse_activator.turned_on.connect(commence_device)
-		mouse_activator.turned_off.connect(conclude_device)
+	if (flipper_activator):
+		flipper_activator.turned_on.connect(commence_device)
+		flipper_activator.turned_off.connect(conclude_device)
 
 func _process(delta):
 	pass

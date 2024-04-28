@@ -50,7 +50,7 @@ rotation = 1.57079
 shape = SubResource("RectangleShape2D_hiehq")
 
 [node name="Wrangler" type="Node2D" parent="."]
-position = Vector2(62, 0)
+position = Vector2(67, 0)
 metadata/_edit_group_ = true
 
 [node name="WranglerSprite" type="AnimatedSprite2D" parent="Wrangler"]
@@ -58,20 +58,23 @@ sprite_frames = SubResource("SpriteFrames_3cbev")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="MachineBooter" type="Node" parent="Wrangler" node_paths=PackedStringArray("mouse_activator", "machine_sprite")]
+[node name="MachineBooter" type="Node" parent="Wrangler" node_paths=PackedStringArray("flipper_activator", "machine_sprite")]
 script = ExtResource("6_vjbgj")
-mouse_activator = NodePath("../../Flipper/MouseSwitcher")
+flipper_activator = NodePath("../../Flipper/MouseSwitcher")
 machine_sprite = NodePath("../WranglerSprite")
 
 [node name="SteeringWheels" parent="." instance=ExtResource("7_ssjbw")]
 position = Vector2(-27, 0)
-metadata/_edit_group_ = true
 
 [node name="RotatorWheel" parent="SteeringWheels" index="0"]
-position = Vector2(0, -26)
+position = Vector2(-2, 0)
+metadata/_edit_group_ = true
 
 [node name="ThrusterWheel" parent="SteeringWheels" index="1"]
-position = Vector2(0, 27)
+position = Vector2(-58, 0)
+
+[node name="ThrustShape" parent="SteeringWheels/ThrusterWheel/ThrustArea" index="1"]
+polygon = PackedVector2Array(13, 0, -11, 14, -11, -14)
 
 [node name="MouseSteerer" type="Node" parent="SteeringWheels" node_paths=PackedStringArray("being_to_move", "thrust_wheel_container", "thrust_wheel", "rotator_wheel_container", "rotator_wheel")]
 script = ExtResource("8_7e5eg")
@@ -85,7 +88,8 @@ rotator_wheel = NodePath("../RotatorWheel/RotatingArea")
 position = Vector2(21, 0)
 
 [node name="FlipperswitchSprite" parent="Flipper/FlipperswitchArea" index="0"]
-autoplay = "off"
+animation = &"on"
+autoplay = "on"
 
 [node name="MouseSwitcher" type="Node" parent="Flipper" node_paths=PackedStringArray("flipperswitch_area", "flipperswitch_sprite")]
 script = ExtResource("5_4jprf")

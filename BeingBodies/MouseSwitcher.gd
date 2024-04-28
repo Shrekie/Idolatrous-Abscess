@@ -19,9 +19,9 @@ _shape_idx: int):
 		if(event.button_index == 1 and event.pressed == true):
 			if flipperswitch_on:
 				flipperswitch_on = false
-				flipperswitch_sprite.play("off")
+				flipperswitch_sprite.play("on")
 				turned_off.emit()
 			else:
 				flipperswitch_on = true
-				flipperswitch_sprite.play("on")
+				flipperswitch_sprite.play("off")
 				turned_on.emit()
